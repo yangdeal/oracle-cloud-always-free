@@ -11,7 +11,3 @@ data "oci_core_images" "InstanceImageOCID" {
     regex  = true
   }
 }
-
-# output "os_image" {
-#   value = data.oci_core_images.InstanceImageOCID.images[0].id
-# }
