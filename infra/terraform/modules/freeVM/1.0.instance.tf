@@ -4,7 +4,7 @@ resource "oci_core_instance" "free-instance" {
   compartment_id = var.compartment_id
   create_vnic_details {
     assign_public_ip = var.assign_public_ip
-    display_name     = "ssv-decymber-instance"
+    display_name     = "${var.instance_display_name}_interface"
     freeform_tags = {
     }
     nsg_ids = [

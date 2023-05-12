@@ -23,12 +23,36 @@ resource oci_core_security_list protected_subnet_security_list {
   ingress_security_rules {
     description = "Allow "
     protocol    = "6"
-    source      = "172.16.0.0/16"
+    source      = "172.16.0.0/24"
     source_type = "CIDR_BLOCK"
     stateless   = "false"
     tcp_options {
       max = "22"
       min = "22"
+    }
+  }
+
+  ingress_security_rules {
+    description = "Allow "
+    protocol    = "6"
+    source      = "172.16.0.0/16"
+    source_type = "CIDR_BLOCK"
+    stateless   = "false"
+    tcp_options {
+      max = "80"
+      min = "80"
+    }
+  }
+
+  ingress_security_rules {
+    description = "Allow "
+    protocol    = "6"
+    source      = "172.16.0.0/16"
+    source_type = "CIDR_BLOCK"
+    stateless   = "false"
+    tcp_options {
+      max = "443"
+      min = "443"
     }
   }
 
