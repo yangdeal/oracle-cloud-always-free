@@ -42,6 +42,17 @@ resource oci_core_security_list public_subnet_security_list {
       min = "61022"
     }
   }
+  ingress_security_rules {
+    description = "Allow "
+    protocol    = "6"
+    source      = "0.0.0.0/0"
+    source_type = "CIDR_BLOCK"
+    stateless   = "false"
+    tcp_options {
+      max = "6443"
+      min = "6443"
+    }
+  }
   egress_security_rules {
     destination = "0.0.0.0/0"
     protocol = "all"

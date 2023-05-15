@@ -1,3 +1,6 @@
+# For
+This is to create 2 x e2.1.micro and ALB
+
 # before start
 Need have below env setup in .zshrc or .bashrc:
 ```bash
