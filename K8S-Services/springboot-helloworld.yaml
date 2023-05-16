@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-deployment
+spec:
+  selector:
+    matchLabels:
+      app: springboot
+  replicas: 20
+  template:
+    metadata:
+      labels:
+        app: springboot
+    spec:
+      containers:
+      - name: nginx
+        image: ydeal/springboot-helloworld:0.2
+        ports:
+        - containerPort: 8080
+          name: http-web-svc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: srv-http
+  labels:
+    app: springboot
+  annotations:
+    oci.oraclecloud.com/load-balancer-type: "nlb"
+    oci-network-load-balancer.oraclecloud.com/health-check-retries: "5"
+    oci-network-load-balancer.oraclecloud.com/health-check-interval: "15000"
+    oci-network-load-balancer.oraclecloud.com/health-check-timeout: "4000"
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: http-web-svc
+  selector:
+    app: springboot
