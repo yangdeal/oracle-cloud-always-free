@@ -24,6 +24,19 @@ apiVersion: v1
 kind: Service
 metadata:
   name: srv-http
+spec:
+  selector:
+    app: springboot
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: http-web-svc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: srv-oci-http
   labels:
     app: springboot
   annotations:
@@ -38,3 +51,23 @@ spec:
     targetPort: http-web-svc
   selector:
     app: springboot
+
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: svc-http-alb
+#  labels:
+#    app: springboot
+#  annotations:
+#    oci.oraclecloud.com/load-balancer-type: "lb"
+#    service.beta.kubernetes.io/oci-load-balancer-shape: "flexible"
+#    service.beta.kubernetes.io/oci-load-balancer-shape-flex-min: "10"
+#    service.beta.kubernetes.io/oci-load-balancer-shape-flex-max: "10"
+#spec:
+#  type: LoadBalancer
+#  ports:
+#  - port: 80
+#    targetPort: http-web-svc
+#  selector:
+#    app: springboot
