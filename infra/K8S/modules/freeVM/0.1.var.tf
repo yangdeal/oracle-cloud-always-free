@@ -24,3 +24,7 @@ variable "public_keys" {}
 variable "subnet_id" {}
 
 variable "assign_public_ip" {}
+
+variable "nsg_id" {
+  default = ""
+}

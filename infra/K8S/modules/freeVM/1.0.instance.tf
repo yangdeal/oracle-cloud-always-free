@@ -1,3 +1,4 @@
+
 resource "oci_core_instance" "free-instance" {
   availability_domain = var.availability_domain
 
@@ -5,10 +6,8 @@ resource "oci_core_instance" "free-instance" {
   create_vnic_details {
     assign_public_ip = var.assign_public_ip
     display_name     = "${var.instance_display_name}_interface"
-    freeform_tags = {
-    }
-    nsg_ids = [
-    ]
+    freeform_tags = {}
+    nsg_ids = var.nsg_id == "" ? [] : [ var.nsg_id ]
     skip_source_dest_check = "false"
     subnet_id              = var.subnet_id
   }
