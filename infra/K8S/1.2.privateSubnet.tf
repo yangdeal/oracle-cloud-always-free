@@ -18,27 +18,6 @@ resource "oci_core_security_list" "private_subnet_sl" {
     protocol    = "all"
   }
 
-  #  ingress_security_rules {
-  #    stateless   = false
-  #    source      = "10.0.0.0/24"
-  #    source_type = "CIDR_BLOCK"
-  #    protocol    = "6"
-  #    tcp_options {
-  #      min = 10256
-  #      max = 10256
-  #    }
-  #  }
-  #
-  #  ingress_security_rules {
-  #    stateless   = false
-  #    source      = "10.0.0.0/24"
-  #    source_type = "CIDR_BLOCK"
-  #    protocol    = "6"
-  #    tcp_options {
-  #      min = 31600
-  #      max = 31600
-  #    }
-  #  }
 }
 
 resource "oci_core_subnet" "vcn_private_subnet" {

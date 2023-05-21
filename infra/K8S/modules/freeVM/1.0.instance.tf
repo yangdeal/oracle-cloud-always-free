@@ -4,10 +4,10 @@ resource "oci_core_instance" "free-instance" {
 
   compartment_id = var.compartment_id
   create_vnic_details {
-    assign_public_ip = var.assign_public_ip
-    display_name     = "${var.instance_display_name}_interface"
-    freeform_tags = {}
-    nsg_ids = var.nsg_id == "" ? [] : [ var.nsg_id ]
+    assign_public_ip       = var.assign_public_ip
+    display_name           = "${var.instance_display_name}_interface"
+    freeform_tags          = {}
+    nsg_ids                = var.nsg_id == "" ? [] : [var.nsg_id]
     skip_source_dest_check = "false"
     subnet_id              = var.subnet_id
   }
@@ -27,8 +27,8 @@ resource "oci_core_instance" "free-instance" {
     # TODO: use base64encode
     # base64encode changes even the file does not change, and result the instance replaced.
     # hardcode the user_data for now
-#    "user_data"           = base64encode(file("${path.module}/initial.sh"))
-    "user_data" ="IyEvYmluL2Jhc2gKIyByZWRpcmVjdCBzdGRvdXQvc3RkZXJyIHRvIGEgZmlsZQpleGVjID4gL3RtcC9zdGFydC11cC5sb2cgMj4mMQoKIyBzdGFydCB0aW1lc3RhbXAKZGF0ZQplY2hvICJ0aGlzIGlzIHN0YXJ0IHVwIHNjcmlwdCIKCmFwdCBpbnN0YWxsIC15IG5ldC10b29scyBodG9wIHZpbSBjYS1jZXJ0aWZpY2F0ZXMgY3VybCBnbnVwZyB0bXV4IHpzaAo="
+    #    "user_data"           = base64encode(file("${path.module}/initial.sh"))
+    "user_data" = "IyEvYmluL2Jhc2gKIyByZWRpcmVjdCBzdGRvdXQvc3RkZXJyIHRvIGEgZmlsZQpleGVjID4gL3RtcC9zdGFydC11cC5sb2cgMj4mMQoKIyBzdGFydCB0aW1lc3RhbXAKZGF0ZQplY2hvICJ0aGlzIGlzIHN0YXJ0IHVwIHNjcmlwdCIKCmFwdCBpbnN0YWxsIC15IG5ldC10b29scyBodG9wIHZpbSBjYS1jZXJ0aWZpY2F0ZXMgY3VybCBnbnVwZyB0bXV4IHpzaAo="
   }
   #preserve_boot_volume = <<Optional value not found in discovery>>
   shape = var.instance_shape

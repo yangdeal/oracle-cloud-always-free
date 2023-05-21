@@ -26,8 +26,8 @@ resource "oci_core_security_list" "public_subnet_sl" {
     stateless   = false
 
     tcp_options {
-      max = 22
-      min = 22
+      max = 80
+      min = 80
     }
   }
 
