@@ -12,9 +12,17 @@ spec:
       labels:
         app: jenkins
     spec:
+      volumes:
+        - name: nfs-volume
+          nfs: 
+            server: 10.0.100.100
+            path: /var/nfs/general/jenkins
       containers:
       - name: jenkins
         image: jenkins/jenkins:lts-jdk11
+        volumeMounts:
+          - name: nfs-volume
+            mountPath: /var/jenkins_home
         ports:
         - containerPort: 8080
 

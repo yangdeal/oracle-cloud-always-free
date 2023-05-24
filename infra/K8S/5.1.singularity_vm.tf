@@ -24,22 +24,22 @@ resource "oci_core_network_security_group" "singularity_network_security_group" 
 }
 
 # Ingress
-resource "oci_core_network_security_group_security_rule" "singularity_22" {
-  network_security_group_id = oci_core_network_security_group.singularity_network_security_group.id
-  direction                 = "INGRESS"
-  protocol                  = 6
+# resource "oci_core_network_security_group_security_rule" "singularity_22" {
+#   network_security_group_id = oci_core_network_security_group.singularity_network_security_group.id
+#   direction                 = "INGRESS"
+#   protocol                  = 6
 
-  source_type = "CIDR_BLOCK"
-  source      = "0.0.0.0/0"
-  #    stateless = var.network_security_group_security_rule_stateless
-  tcp_options {
-    destination_port_range {
-      #Required
-      max = 22
-      min = 22
-    }
-  }
-}
+#   source_type = "CIDR_BLOCK"
+#   source      = "0.0.0.0/0"
+#   #    stateless = var.network_security_group_security_rule_stateless
+#   tcp_options {
+#     destination_port_range {
+#       #Required
+#       max = 22
+#       min = 22
+#     }
+#   }
+# }
 
 resource "oci_core_network_security_group_security_rule" "singularity_61022" {
   network_security_group_id = oci_core_network_security_group.singularity_network_security_group.id

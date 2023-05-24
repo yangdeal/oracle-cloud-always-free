@@ -28,3 +28,7 @@ variable "assign_public_ip" {}
 variable "nsg_id" {
   default = ""
 }
+
+variable "private_ip" {
+  default = ""
+}

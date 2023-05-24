@@ -10,6 +10,7 @@ resource "oci_core_instance" "free-instance" {
     nsg_ids                = var.nsg_id == "" ? [] : [var.nsg_id]
     skip_source_dest_check = "false"
     subnet_id              = var.subnet_id
+    private_ip             = var.private_ip == "" ? null : var.private_ip
   }
   #dedicated_vm_host_id = <<Optional value not found in discovery>>
   display_name = var.instance_display_name
