@@ -32,8 +32,11 @@ spec:
         app: wordpress
         tier: mysql
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
       containers:
-      - image: mysql:latest
+      - image: mysql
         name: mysql
         env:
         - name: MYSQL_ROOT_PASSWORD
@@ -44,10 +47,11 @@ spec:
         ports:
         - containerPort: 3306
           name: mysql
-      #   volumeMounts:
-      #   - name: mysql-persistent-storage
-      #     mountPath: /var/lib/mysql
-      # volumes:
-      # - name: mysql-persistent-storage
-      #   persistentVolumeClaim:
-      #     claimName: mysql-pv-claim
+        volumeMounts:
+        - name: nfs-volume
+          mountPath: /var/lib/mysql
+      volumes:
+        - name: nfs-volume
+          nfs: 
+            server: 10.0.100.100
+            path: /var/nfs/general/mysql

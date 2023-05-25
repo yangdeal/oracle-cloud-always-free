@@ -12,9 +12,17 @@ spec:
       labels:
         app: nginx01
     spec:
+      volumes:
+        - name: nfs-volume
+          nfs: 
+            server: 10.0.100.100
+            path: /var/nfs/general/nginx01
       containers:
       - name: nginx01
         image: nginx:latest
+        volumeMounts:
+          - name: nfs-volume
+            mountPath: /usr/share/nginx/html
         ports:
         - containerPort: 80
           # name: nginx01-port

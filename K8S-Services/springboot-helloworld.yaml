@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: springboot
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -33,43 +33,4 @@ spec:
       port: 80
       targetPort: http-web-svc
       nodePort: 30080
-
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: srv-oci-http
-#   labels:
-#     app: springboot
-#   annotations:
-#     oci.oraclecloud.com/load-balancer-type: "nlb"
-#     oci-network-load-balancer.oraclecloud.com/health-check-retries: "5"
-#     oci-network-load-balancer.oraclecloud.com/health-check-interval: "15000"
-#     oci-network-load-balancer.oraclecloud.com/health-check-timeout: "4000"
-# spec:
-#   type: LoadBalancer
-#   ports:
-#   - port: 80
-#     targetPort: http-web-svc
-#   selector:
-#     app: springboot
-
-#---
-#apiVersion: v1
-#kind: Service
-#metadata:
-#  name: svc-http-alb
-#  labels:
-#    app: springboot
-#  annotations:
-#    oci.oraclecloud.com/load-balancer-type: "lb"
-#    service.beta.kubernetes.io/oci-load-balancer-shape: "flexible"
-#    service.beta.kubernetes.io/oci-load-balancer-shape-flex-min: "10"
-#    service.beta.kubernetes.io/oci-load-balancer-shape-flex-max: "10"
-#spec:
-#  type: LoadBalancer
-#  ports:
-#  - port: 80
-#    targetPort: http-web-svc
-#  selector:
-#    app: springboot
+      

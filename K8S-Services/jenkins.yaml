@@ -20,6 +20,9 @@ spec:
       containers:
       - name: jenkins
         image: jenkins/jenkins:lts-jdk11
+        resources:
+          limits:
+            memory: "1Gi"
         volumeMounts:
           - name: nfs-volume
             mountPath: /var/jenkins_home
