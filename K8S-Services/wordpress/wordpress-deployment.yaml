@@ -34,6 +34,11 @@ spec:
       containers:
       - image: wordpress
         name: wordpress
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "1"
         env:
         - name: WORDPRESS_DB_HOST
           value: wordpress-mysql
@@ -55,3 +60,41 @@ spec:
           nfs: 
             server: 10.0.100.100
             path: /var/nfs/general/wordpress
+
+
+      #   volumeMounts:
+      #   - name: nfs-volume
+      #     mountPath: /var/www/html
+      # volumes:
+      #   - name: nfs-volume
+      #     persistentVolumeClaim:
+      #       claimName: nfs-persistent-volume-claim
+
+
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: nfs-persistent-volume
+# spec:
+#   capacity:
+#     storage: 5Gi
+#   accessModes:
+#     - ReadWriteMany
+#   nfs:
+#     server: 10.0.100.100
+#     path: "/var/nfs/general/wordpress"
+
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: nfs-persistent-volume-claim
+# spec:
+#   accessModes:
+#     - ReadWriteMany
+#   storageClassName: ""
+#   resources:
+#     requests:
+#       # note that this is not a restriction, but rather a "I want a PersistentVolume where 10Gi fit":
+#       storage: 5Gi
