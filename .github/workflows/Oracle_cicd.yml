@@ -31,6 +31,7 @@ jobs:
           exec -l $SHELL
           oci setup repair-file-permissions --file /home/runner/.oci/config
           oci setup repair-file-permissions --file /home/runner/.oci/oracle_api_key_for_gitAction.pem
+          chmod 600 ~/.oci/*
       - name: 'Test OCI CLI'
         run: |
           ls -l ~/.oci
