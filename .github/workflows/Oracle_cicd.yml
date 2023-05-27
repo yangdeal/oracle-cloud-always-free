@@ -37,7 +37,7 @@ jobs:
           ls -l ~/.oci
           pwd
           chmod 600 ~/.oci/*
-          oci network vcn list -c yangdeal
+          oci iam user list
       - uses: actions/checkout@v3
       - name: Setup tmate session
         if: ${{ failure() }}
