@@ -34,7 +34,7 @@ jobs:
       - name: 'Test OCI CLI'
         run: |
           ls -l ~/.oci
-          head -n2 ~/.oci/config
+          cat ~/.oci/config
           head -n2 ~/.oci/oracle_api_key_for_gitAction.pem
           pwd
           oci network vcn list -c yangdeal
