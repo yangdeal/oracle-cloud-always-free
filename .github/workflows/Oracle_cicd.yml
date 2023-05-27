@@ -24,18 +24,18 @@ jobs:
           mkdir ~/.oci
           echo "${{ secrets.ORACLE_API_KEY_FOR_GITACTION_PEM }}" > ~/.oci/config
           echo "${{ secrets.ORACLE_CONFIG_FOR_GITACTION }}" > ~/.oci/oracle_api_key_for_gitAction.pem
-          # curl -L -O https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
-          # chmod +x install.sh
-          # ./install.sh --accept-all-defaults
-          # echo "/home/runner/bin" >> $GITHUB_PATH
-          # exec -l $SHELL
-          # oci setup repair-file-permissions --file /home/runner/.oci/config
-          # oci setup repair-file-permissions --file /home/runner/.oci/oracle_api_key_for_gitAction.pem
+          curl -L -O https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
+          chmod +x install.sh
+          ./install.sh --accept-all-defaults
+          echo "/home/runner/bin" >> $GITHUB_PATH
+          exec -l $SHELL
+          oci setup repair-file-permissions --file /home/runner/.oci/config
+          oci setup repair-file-permissions --file /home/runner/.oci/oracle_api_key_for_gitAction.pem
       - name: 'Test OCI CLI'
         run: |
           ls -l ~/.oci
           pwd
-          # oci network vcn list -c yangdeal
+          oci network vcn list -c yangdeal
       - uses: actions/checkout@v3
       - name: Setup tmate session
         if: ${{ failure() }}
