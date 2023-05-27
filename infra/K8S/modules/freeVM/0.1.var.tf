@@ -10,7 +10,7 @@ variable "boot_volume_size_in_gbs" {
 
 variable "compartment_id" {}
 
- variable "availability_domain" {}
+variable "availability_domain" {}
 
 variable "instance_display_name" {}
 
@@ -24,3 +24,11 @@ variable "public_keys" {}
 variable "subnet_id" {}
 
 variable "assign_public_ip" {}
+
+variable "nsg_id" {
+  default = ""
+}
+
+variable "private_ip" {
+  default = ""
+}

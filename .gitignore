@@ -2,6 +2,9 @@
 **/.terraform/*
 **/.terraform.lock.hcl
 
+# local password file
+**/*.env
+
 # .tfstate files
 *.tfstate
 *.tfstate.*

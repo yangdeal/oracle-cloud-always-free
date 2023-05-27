@@ -1,20 +1,12 @@
-# oracle-cloud-always-free
+# For
+This is the code to deploy K8S infra on Oracle cloud using Always Free resources
 
-# before start
-Need have below env setup in .zshrc or .bashrc:
-```bash
-export TF_VAR_tenancy_ocid="SOMETHING"
-export TF_VAR_user_ocid="SOMETHING"
-export TF_VAR_fingerprint="SOMETHING"
-export TF_VAR_private_key_path="SOMETHING"
-export TF_VAR_backend_address="SOMETHING"
-```
+# Diagram
 
-# terraform init
-```bash
-terraform init -backend-config="address=${TF_VAR_backend_address}"
-```
+![Diagram](Pics/OracleCloudInfra.png)
 
-# Reference
-- [Oracle terraform guide](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformgettingstarted.htm)
-
+# Traffic flow
+- User access via Cloudflare to LB and then to K8S
+- K8S Persistent Volumes provided by NFS instance to allow a single 50GB disk shared with multi containers.
+- All management traffic must route through bastion (Singularity) instance.
+- No public access to K8S.
