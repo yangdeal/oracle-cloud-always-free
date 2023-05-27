@@ -20,6 +20,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Show TF version
+        run: |
+          terraform --version
+
       - name: 'Get private key'
         run: |
           mkdir ~/.oci
