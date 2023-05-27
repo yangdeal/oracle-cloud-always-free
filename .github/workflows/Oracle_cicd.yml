@@ -36,8 +36,10 @@ jobs:
           ls -l ~/.oci
           pwd
           # oci network vcn list -c yangdeal
-      - name: Run tmate
-        uses: mxschmitt/action-tmate@v2
+      - uses: actions/checkout@v3
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
     #   - name: 'Install kubectl'
     #     run: |
     #       mkdir /tmp/.kube
