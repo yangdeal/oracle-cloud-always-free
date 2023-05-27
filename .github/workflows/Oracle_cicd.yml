@@ -13,8 +13,8 @@ jobs:
       TF_VAR_tenancy_ocid: ${{ secrets.TF_VAR_tenancy_ocid }}
       TF_VAR_user_ocid: ${{ secrets.TF_VAR_user_ocid }}
       TF_VAR_fingerprint: ${{ secrets.TF_VAR_fingerprint }}
-      TF_VAR_private_key_path: "~/.oci/oracle_api_key_for_gitAction.pem"
       TF_VAR_backend_address: ${{ secrets.TF_VAR_backend_address }}
+      TF_VAR_private_key_path: "~/.oci/oracle_api_key_for_gitAction.pem"
 
     steps:
       - name: Checkout
@@ -27,7 +27,6 @@ jobs:
       - name: 'Get private key'
         run: |
           mkdir ~/.oci
-          echo "${{ secrets.ORACLE_CONFIG_FOR_GITACTION }}" > ~/.oci/config
           echo "${{ secrets.ORACLE_API_KEY_FOR_GITACTION_PEM }}" > ~/.oci/oracle_api_key_for_gitAction.pem
           chmod 600 ~/.oci/*
 
@@ -37,12 +36,11 @@ jobs:
           terraform_version: 1.4.6
           
       - name: Init
-        run: cd infra/K8S; terraform init -backend-config="address=${TF_VAR_backend_address}"
+        run: make tfInit
 
       - name: Plan
-        run: cd infra/K8S; terraform plan
+        run: make tfPlan
 
-      # - name: Setup tmate session
-      #   if: ${{ failure() }}
-      #   uses: mxschmitt/action-tmate@v3
-
+      - name: Setup tmate session
+        if: (github.ref != 'refs/heads/master') && (${{ failure() }})
+        uses: mxschmitt/action-tmate@v3
