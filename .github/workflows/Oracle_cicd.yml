@@ -9,9 +9,35 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      TF_VAR_tenancy_ocid: ${{ secrets.TF_VAR_tenancy_ocid }}
+      TF_VAR_user_ocid: ${{ secrets.TF_VAR_user_ocid }}
+      TF_VAR_fingerprint: ${{ secrets.TF_VAR_fingerprint }}
+      TF_VAR_private_key_path: "~/.oci/oracle_api_key_for_gitAction.pem"
+      TF_VAR_backend_address: ${{ secrets.TF_VAR_backend_address }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: 'Get private key'
+        run: |
+          mkdir ~/.oci
+          # echo "${{ secrets.ORACLE_CONFIG_FOR_GITACTION }}" > ~/.oci/config
+          echo "${{ secrets.ORACLE_API_KEY_FOR_GITACTION_PEM }}" > ~/.oci/oracle_api_key_for_gitAction.pem
+          chmod 600 ~/.oci/*
+      - name: Get terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.1.7
+      - name: Init
+        run: cd infra/K8S; terraform init -backend-config="address=${TF_VAR_backend_address}"
+      - name: Plna
+        run: cd infra/K8S; terraform plan 
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
+
+
+
+      # - name: Checkout
+      #   uses: actions/checkout@v2
     #   - name: Set up QEMU
     #     uses: docker/setup-qemu-action@v1
     #   - name: Set up Docker Buildx
@@ -19,29 +45,29 @@ jobs:
     #     uses: docker/setup-buildx-action@v1
     #     with:
     #       install: true
-      - name: 'Install OCI CLI'
-        run: |
-          mkdir ~/.oci
-          echo "${{ secrets.ORACLE_CONFIG_FOR_GITACTION }}" > ~/.oci/config
-          echo "${{ secrets.ORACLE_API_KEY_FOR_GITACTION_PEM }}" > ~/.oci/oracle_api_key_for_gitAction.pem
-          curl -L -O https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
-          chmod +x install.sh
-          ./install.sh --accept-all-defaults
-          echo "/home/runner/bin" >> $GITHUB_PATH
-          exec -l $SHELL
-          oci setup repair-file-permissions --file /home/runner/.oci/config
-          oci setup repair-file-permissions --file /home/runner/.oci/oracle_api_key_for_gitAction.pem
-          chmod 600 ~/.oci/*
-      - name: 'Test OCI CLI'
-        run: |
-          ls -l ~/.oci
-          pwd
-          chmod 600 ~/.oci/*
-          oci iam user list
-      - uses: actions/checkout@v3
-      - name: Setup tmate session
-        if: ${{ failure() }}
-        uses: mxschmitt/action-tmate@v3
+      # - name: 'Install OCI CLI'
+      #   run: |
+      #     mkdir ~/.oci
+      #     echo "${{ secrets.ORACLE_CONFIG_FOR_GITACTION }}" > ~/.oci/config
+      #     echo "${{ secrets.ORACLE_API_KEY_FOR_GITACTION_PEM }}" > ~/.oci/oracle_api_key_for_gitAction.pem
+      #     curl -L -O https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
+      #     chmod +x install.sh
+      #     ./install.sh --accept-all-defaults
+      #     echo "/home/runner/bin" >> $GITHUB_PATH
+      #     exec -l $SHELL
+      #     oci setup repair-file-permissions --file /home/runner/.oci/config
+      #     oci setup repair-file-permissions --file /home/runner/.oci/oracle_api_key_for_gitAction.pem
+      #     chmod 600 ~/.oci/*
+      # - name: 'Test OCI CLI'
+      #   run: |
+      #     ls -l ~/.oci
+      #     pwd
+      #     chmod 600 ~/.oci/*
+      #     oci iam user list
+      # - uses: actions/checkout@v3
+      # - name: Setup tmate session
+      #   if: ${{ failure() }}
+      #   uses: mxschmitt/action-tmate@v3
     #   - name: 'Install kubectl'
     #     run: |
     #       mkdir /tmp/.kube
