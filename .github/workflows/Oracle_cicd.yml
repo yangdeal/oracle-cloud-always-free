@@ -1,6 +1,5 @@
 name: Oracle cloud deployment
 on:
-  workflow_dispatch:
   push:
     # branches:
     #   - master
