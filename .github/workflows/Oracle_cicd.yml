@@ -34,10 +34,10 @@ jobs:
       - name: 'Test OCI CLI'
         run: |
           ls -l ~/.oci
-          cat ~/.oci/config
-          head -n2 ~/.oci/oracle_api_key_for_gitAction.pem
           pwd
           oci network vcn list -c yangdeal
+      - name: Run tmate
+        uses: mxschmitt/action-tmate@v2
     #   - name: 'Install kubectl'
     #     run: |
     #       mkdir /tmp/.kube
