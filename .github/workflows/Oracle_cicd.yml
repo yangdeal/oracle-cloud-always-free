@@ -1,0 +1,48 @@
+name: Oracle cloud deployment
+on:
+  push:
+    # branches:
+    #   - master
+    # paths:
+    #   - infra/**
+  workflow_dispatch: 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      TF_VAR_tenancy_ocid: ${{ secrets.TF_VAR_tenancy_ocid }}
+      TF_VAR_user_ocid: ${{ secrets.TF_VAR_user_ocid }}
+      TF_VAR_fingerprint: ${{ secrets.TF_VAR_fingerprint }}
+      TF_VAR_private_key_path: "~/.oci/oracle_api_key_for_gitAction.pem"
+      TF_VAR_backend_address: ${{ secrets.TF_VAR_backend_address }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Show TF version
+        run: |
+          terraform --version
+
+      - name: 'Get private key'
+        run: |
+          mkdir ~/.oci
+          echo "${{ secrets.ORACLE_CONFIG_FOR_GITACTION }}" > ~/.oci/config
+          echo "${{ secrets.ORACLE_API_KEY_FOR_GITACTION_PEM }}" > ~/.oci/oracle_api_key_for_gitAction.pem
+          chmod 600 ~/.oci/*
+
+      - name: Get terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.4.6
+          
+      - name: Init
+        run: cd infra/K8S; terraform init -backend-config="address=${TF_VAR_backend_address}"
+
+      - name: Plan
+        run: cd infra/K8S; terraform plan
+
+      # - name: Setup tmate session
+      #   if: ${{ failure() }}
+      #   uses: mxschmitt/action-tmate@v3
+
