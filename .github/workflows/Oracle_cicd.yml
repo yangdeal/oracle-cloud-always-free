@@ -36,6 +36,7 @@ jobs:
         run: |
           ls -l ~/.oci
           pwd
+          chmod 600 ~/.oci/*
           oci network vcn list -c yangdeal
       - uses: actions/checkout@v3
       - name: Setup tmate session
