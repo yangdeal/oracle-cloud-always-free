@@ -1,5 +1,6 @@
 name: Oracle cloud deployment
 on:
+  workflow_dispatch:
   push:
     # branches:
     #   - master
@@ -34,6 +35,9 @@ jobs:
       - name: 'Test OCI CLI'
         run: |
           ls -l ~/.oci
+          head -n2 ~/.oci/config
+          head -n ~/.oci/oracle_api_key_for_gitAction.pem
+          pwd
           oci network vcn list -c yangdeal
     #   - name: 'Install kubectl'
     #     run: |
