@@ -1,3 +1,5 @@
+# oracle-cloud-always-free
+
 # before start
 Need have below env setup in .zshrc or .bashrc:
 ```bash
