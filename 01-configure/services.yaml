@@ -1,0 +1,36 @@
+Services:
+
+    # DNS name is same as key
+    # Persistent volume: a NFS folder with the key name is required to be created manually
+    # persistent_volume_mount: The mount point insider the container
+    # alb: Optional and default to true. False for not create ALB listener, for internal service, e.g. DB
+    # CPU and Memory is optional
+  nginx:
+    image: nginx
+    container_port: 80
+    replicas: 2
+    persistent_volume_mount: /usr/share/nginx/html
+
+  nginx01:
+    image: nginx
+    container_port: 80
+    replicas: 1
+    persistent_volume_mount: /usr/share/nginx/html
+
+#  Jenkins:
+#    image: jenkins/jenkins:lts-jdk11
+#    cpu: 500m
+#    memory: 1Gi
+#    container_port: 80
+#    persistent_volume_mount: /var/jenkins_home
+#
+#  dnsutils:
+#    alb: false
+#    image: registry.k8s.io/e2e-k8s_services-images/jessie-dnsutils:1.3
+#
+#  mysql01:
+#    image: mysql
+#    container_port: 3306
+#    alb: false
+#    persistent_volume_mount: /var/lib/mysql
+    
