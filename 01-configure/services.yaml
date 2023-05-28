@@ -11,19 +11,14 @@ Services:
     replicas: 2
     persistent_volume_mount: /usr/share/nginx/html
 
-  nginx01:
-    image: nginx
-    container_port: 80
-    replicas: 1
-    persistent_volume_mount: /usr/share/nginx/html
-
-#  Jenkins:
-#    image: jenkins/jenkins:lts-jdk11
+  jenkins:
+    image: jenkins/jenkins:lts-jdk11
 #    cpu: 500m
 #    memory: 1Gi
-#    container_port: 80
-#    persistent_volume_mount: /var/jenkins_home
-#
+    container_port: 8080
+    health_check_url: "/login"
+    persistent_volume_mount: /var/jenkins_home
+
 #  dnsutils:
 #    alb: false
 #    image: registry.k8s.io/e2e-k8s_services-images/jessie-dnsutils:1.3

@@ -6,4 +6,5 @@ module "jenkins_web" {
   listener_name    = var.name
   dns_name         = ["${var.name}.mytoybox.win"]
   k8s_service_port = random_integer.node_port.result
+  health_check_url = var.health_check_url
 }

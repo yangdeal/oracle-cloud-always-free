@@ -25,12 +25,24 @@ resource "kubernetes_deployment" "this" {
         }
       }
       spec {
+        volume {
+          name = "nfs-volume"
+          nfs {
+            path   = "/var/nfs/general/${var.name}"
+            server = var.nfs_server
+          }
+        }
         container {
           image = var.image
           name  = var.name
 
           port {
             container_port = var.container_port
+          }
+
+          volume_mount {
+            mount_path = var.mount_path
+            name = "nfs-volume"
           }
 
 #          resources {

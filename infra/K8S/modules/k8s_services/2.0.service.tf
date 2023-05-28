@@ -9,8 +9,8 @@ resource "kubernetes_service" "this" {
     port {
       node_port   = random_integer.node_port.result
       port        = var.container_port
+      target_port = var.container_port
     }
-
     type = "NodePort"
   }
 }
