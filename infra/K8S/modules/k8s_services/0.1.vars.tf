@@ -1,5 +1,7 @@
 variable "name" {}
 
+variable "name_space" {}
+
 variable "replicas" {
   default = 1
 }
@@ -20,3 +22,5 @@ variable "nfs_server" {
 variable "health_check_url" {
   default = "/"
 }
+
+variable "dns_domain" {}

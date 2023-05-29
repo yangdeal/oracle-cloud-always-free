@@ -1,6 +1,7 @@
 resource "kubernetes_service" "this" {
   metadata {
-    name = var.name
+    name      = var.name
+    namespace = var.name_space
   }
   spec {
     selector = {

@@ -5,7 +5,8 @@ resource "random_integer" "node_port" {
 
 resource "kubernetes_deployment" "this" {
   metadata {
-    name = var.name
+    namespace = var.name_space
+    name      = var.name
     labels = {
       App = var.name
     }
@@ -28,7 +29,7 @@ resource "kubernetes_deployment" "this" {
         volume {
           name = "nfs-volume"
           nfs {
-            path   = "/var/nfs/general/${var.name}"
+            path   = "/var/nfs/general/${var.name_space}/${var.name}"
             server = var.nfs_server
           }
         }
@@ -42,19 +43,19 @@ resource "kubernetes_deployment" "this" {
 
           volume_mount {
             mount_path = var.mount_path
-            name = "nfs-volume"
+            name       = "nfs-volume"
           }
 
-#          resources {
-#            limits = {
-#              cpu    = "0.5"
-#              memory = "512Mi"
-#            }
-#            requests = {
-#              cpu    = "250m"
-#              memory = "50Mi"
-#            }
-#          }
+          #          resources {
+          #            limits = {
+          #              cpu    = "0.5"
+          #              memory = "512Mi"
+          #            }
+          #            requests = {
+          #              cpu    = "250m"
+          #              memory = "50Mi"
+          #            }
+          #          }
         }
       }
     }

@@ -9,5 +9,7 @@ data "oci_identity_compartments" "my_compartment" {
 }
 
 locals {
-  services_yaml= yamldecode(file("../../01-configure/services.yaml"))
+  services_yaml = yamldecode(file("../../01-configure/services.yaml"))
+  name_space_lower_case = lower(var.name_space)
 }
+
