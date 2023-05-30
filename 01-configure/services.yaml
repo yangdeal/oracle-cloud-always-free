@@ -5,6 +5,8 @@ Services:
     # persistent_volume_mount: The mount point insider the container
     # alb: Optional and default to true. False for not create ALB listener, for internal service, e.g. DB
     # CPU and Memory is optional
+    # health_return_code: default to 200
+    # health_check_url: default to "/"
   nginx:
     image: nginx
     container_port: 80
@@ -19,10 +21,17 @@ Services:
     health_check_url: "/login"
     persistent_volume_mount: /var/jenkins_home
 
-#  jupyter:
-#    image: jupyter/scipy-notebook:aarch64-2023-05-25
-#    container_port: "8888"
-#    persistent_volume_mount: /home/ydeal
+  # jupyter:
+  #   image: jupyter/scipy-notebook
+  #   container_port: 8888
+  #   health_check_url: "/login"
+  #   health_return_code: 405
+  #   persistent_volume_mount: /home/ydeal
+
+  # springboot:
+  #   image: ydeal/springboot-helloworld:0.2
+  #   container_port: 8080
+  #   persistent_volume_mount: /home/springboot
 
 #  dnsutils:
 #    alb: false

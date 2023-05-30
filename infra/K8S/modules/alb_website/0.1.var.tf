@@ -11,3 +11,7 @@ variable "load_balancer_id" {}
 variable "health_check_url" {
   default = "/"
 }
+
+variable "health_return_code" {
+  default = 200
+}

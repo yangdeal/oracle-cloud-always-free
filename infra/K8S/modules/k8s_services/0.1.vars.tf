@@ -24,3 +24,7 @@ variable "health_check_url" {
 }
 
 variable "dns_domain" {}
+
+variable "health_return_code" {
+  default = 200
+}

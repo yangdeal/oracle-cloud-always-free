@@ -7,4 +7,5 @@ module "jenkins_web" {
   dns_name         = local.service_dns
   k8s_service_port = random_integer.node_port.result
   health_check_url = var.health_check_url
+  health_return_code = var.health_return_code
 }

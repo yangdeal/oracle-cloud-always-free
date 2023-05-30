@@ -26,7 +26,7 @@ resource "oci_load_balancer_backend_set" "backend_set" {
     protocol            = "HTTP"
     response_body_regex = ""
     retries             = "3"
-    return_code         = "200"
+    return_code         = var.health_return_code
     timeout_in_millis   = "2000"
     url_path            = var.health_check_url
   }
