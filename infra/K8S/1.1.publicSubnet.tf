@@ -4,15 +4,18 @@ resource "oci_core_security_list" "public_subnet_sl" {
 
   display_name = "free-k8s-public-subnet-sl"
 
+  # Egress
   egress_security_rules {
+    description      = "Allow all traffic out"
     stateless        = false
     destination      = "0.0.0.0/0"
     destination_type = "CIDR_BLOCK"
     protocol         = "all"
   }
 
-
+  #Ingress
   ingress_security_rules {
+    description = "All internal traffic"
     stateless   = false
     source      = "10.0.0.0/16"
     source_type = "CIDR_BLOCK"
@@ -20,6 +23,7 @@ resource "oci_core_security_list" "public_subnet_sl" {
   }
 
   ingress_security_rules {
+    description = "From NLB port 80"
     protocol    = "6"
     source      = "0.0.0.0/0"
     source_type = "CIDR_BLOCK"
@@ -32,6 +36,7 @@ resource "oci_core_security_list" "public_subnet_sl" {
   }
 
   ingress_security_rules {
+    description = "To singularity"
     protocol    = "6"
     source      = "0.0.0.0/0"
     source_type = "CIDR_BLOCK"
@@ -40,6 +45,19 @@ resource "oci_core_security_list" "public_subnet_sl" {
     tcp_options {
       max = 61022
       min = 61022
+    }
+  }
+
+  ingress_security_rules {
+    description = "K8S control plan from Internet"
+    protocol    = "6"
+    source      = "0.0.0.0/0"
+    source_type = "CIDR_BLOCK"
+    stateless   = false
+
+    tcp_options {
+      max = 6443
+      min = 6443
     }
   }
 }

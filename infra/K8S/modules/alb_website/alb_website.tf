@@ -17,17 +17,18 @@ resource "oci_load_balancer_listener" "http_listener" {
   ]
 }
 
+
 resource "oci_load_balancer_backend_set" "backend_set" {
   health_checker {
-    interval_ms = "10000"
+    interval_ms = "5000"
     #is_force_plain_text = <<Optional value not found in discovery>>
-    port                = "30080"
+    port                = var.k8s_service_port
     protocol            = "HTTP"
     response_body_regex = ""
     retries             = "3"
-    return_code         = "200"
-    timeout_in_millis   = "3000"
-    url_path            = "/"
+    return_code         = var.health_return_code
+    timeout_in_millis   = "2000"
+    url_path            = var.health_check_url
   }
   load_balancer_id = var.load_balancer_id
   name             = var.listener_name
