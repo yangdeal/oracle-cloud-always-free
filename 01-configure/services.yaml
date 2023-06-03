@@ -28,10 +28,11 @@ Services:
   #   health_return_code: 405
   #   persistent_volume_mount: /home/ydeal
 
-  # springboot:
-  #   image: ydeal/springboot-helloworld:0.2
-  #   container_port: 8080
-  #   persistent_volume_mount: /home/springboot
+  springboot:
+    image: ydeal/springboot-helloworld:0.2
+    container_port: 8080
+    replicas: 2
+    persistent_volume_mount: /home/springboot
 
 #  dnsutils:
 #    alb: false
