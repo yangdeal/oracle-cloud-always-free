@@ -46,6 +46,8 @@ jobs:
           mv kubectl /usr/local/bin
           mkdir ~/.kube
           echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+          chmod 600 ~/.oci/*
+          chmod 600 ~/.kube/*
 
       - name: 'Currently running services'
         run: kubectl get pods -A
