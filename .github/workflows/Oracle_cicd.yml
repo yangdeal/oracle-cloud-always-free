@@ -17,14 +17,13 @@ jobs:
       TF_VAR_backend_address: ${{ secrets.TF_VAR_backend_address }}
       TF_VAR_private_key_path: "~/.oci/oracle_api_key_for_gitAction.pem"
 
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Show TF version
-        run: |
-          terraform --version
+      # - name: Show TF version
+      #   run: |
+      #     terraform --version
 
       - name: 'Install OCI CLI'
         run: |
@@ -50,8 +49,8 @@ jobs:
           chmod 600 ~/.oci/*
           chmod 600 ~/.kube/*
 
-      - name: 'Currently running services'
-        run: kubectl get pods -A
+      # - name: 'Currently running services'
+      #   run: kubectl get pods -A
 
       - name: TF_Init
         run: make tfInit
