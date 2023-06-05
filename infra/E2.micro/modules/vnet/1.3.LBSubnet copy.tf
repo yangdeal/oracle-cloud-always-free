@@ -14,7 +14,7 @@ resource "oci_core_subnet" "loadbalancer_subnet" {
 }
 
 
-resource oci_core_security_list loadbalancer_subnet_security_list {
+resource "oci_core_security_list" "loadbalancer_subnet_security_list" {
   compartment_id = var.compartment_id
 
   display_name = "loadbalancer_subnet_security_list"
@@ -45,10 +45,10 @@ resource oci_core_security_list loadbalancer_subnet_security_list {
   }
 
   egress_security_rules {
-    destination = "172.16.0.0/16"
-    protocol    = "6"
+    destination      = "172.16.0.0/16"
+    protocol         = "6"
     destination_type = "CIDR_BLOCK"
-    stateless   = "false"
+    stateless        = "false"
     tcp_options {
       max = "80"
       min = "80"
@@ -56,10 +56,10 @@ resource oci_core_security_list loadbalancer_subnet_security_list {
   }
 
   egress_security_rules {
-    destination = "172.16.0.0/16"
-    protocol    = "6"
+    destination      = "172.16.0.0/16"
+    protocol         = "6"
     destination_type = "CIDR_BLOCK"
-    stateless   = "false"
+    stateless        = "false"
     tcp_options {
       max = "443"
       min = "443"
