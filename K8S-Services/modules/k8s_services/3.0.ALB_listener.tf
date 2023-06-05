@@ -1,5 +1,5 @@
-module "jenkins_web" {
-  source = "../../modules/alb_website"
+module "alb" {
+  source = "../../../infra/K8S/modules/alb_website"
 
   backend_node_ip    = var.k8s_backend_node_ips
   load_balancer_id   = var.alb_id
