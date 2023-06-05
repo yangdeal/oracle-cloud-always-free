@@ -1,5 +1,11 @@
 variable "tenancy_ocid" {}
 
+variable "user_ocid" {}
+
+variable "fingerprint" {}
+
+variable "private_key_path" {}
+
 variable "region" { default = "ap-melbourne-1" }
 
 variable "compartment_name" { default = "yangdeal" }
@@ -14,10 +20,8 @@ variable "dns_domain" {
   default = "mytoybox.win"
 }
 
-variable "name_space" {
-  default = "wip"
-}
+variable "name_space" {}
 
 variable "node_pool_name" {
-    default = "free-k8s-node-pool"
+  default = "free-k8s-node-pool"
 }

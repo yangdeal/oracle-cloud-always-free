@@ -1,8 +1,0 @@
-secretGenerator:
-- name: mysql-pass
-  envs:
-  - .mysql_password.env
-resources:
-  - mysql-deployment.yaml
-  - wordpress-deployment.yaml
-  # - phpmyadmin.yaml
