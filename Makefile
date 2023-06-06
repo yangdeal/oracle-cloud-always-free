@@ -15,7 +15,7 @@ infraDeploy:
 
 serviceInit:
 	cd K8S-Services && terraform init --reconfigure -backend-config="endpoint=${TF_VAR_backend_endpoint}"
-	cd K8S-Services && terraform workspace select ${MK_NAMESPACE}
+	cd K8S-Services && terraform workspace select -or-create ${MK_NAMESPACE}
 .PHONY: infraInit
 
 servicePlan:
