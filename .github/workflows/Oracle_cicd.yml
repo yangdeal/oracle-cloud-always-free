@@ -30,6 +30,7 @@ jobs:
           mkdir ~/.oci
           echo "${{ secrets.ORACLE_CONFIG_FOR_GITACTION }}" > ~/.oci/config
           echo "${{ secrets.ORACLE_API_KEY_FOR_GITACTION_PEM }}" > ~/.oci/oracle_api_key_for_gitAction.pem
+          echo "${{ secrets.ORACLE_BACKEND_AWS_CREDENTIALS }}" > ~/.aws/credentials
           curl -L -O https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
           chmod +x install.sh
           ./install.sh --accept-all-defaults
@@ -48,6 +49,7 @@ jobs:
           echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
           chmod 600 ~/.oci/*
           chmod 600 ~/.kube/*
+          chmod 600 ~/.aws/*
 
       # - name: 'Currently running services'
       #   run: kubectl get pods -A
