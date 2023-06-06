@@ -6,6 +6,5 @@ locals {
     oci_containerengine_node_pool.k8s_node_pool.nodes[1].private_ip
   ]
 
-  services_yaml         = yamldecode(file("../../01-configure/services.yaml"))
   name_space_lower_case = lower(var.name_space)
 }

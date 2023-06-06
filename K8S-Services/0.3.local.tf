@@ -10,7 +10,9 @@ locals {
   lb_id        = data.oci_load_balancer_load_balancers.k8s_load_balancers.load_balancers[0].id
 
   name_space_lower_case = lower(var.name_space)
-  services_yaml         = yamldecode(file("../01-configure/services.yaml"))
+  default_services_yaml         = yamldecode(file("../01-configure/default.yaml"))
+  main_services_yaml         = yamldecode(file("../01-configure/main.yaml"))
+  services_yaml = local.name_space_lower_case == "main" ? local.main_services_yaml : local.default_services_yaml
 }
 
 data "oci_load_balancer_load_balancers" "k8s_load_balancers" {

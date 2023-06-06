@@ -52,11 +52,11 @@ jobs:
       # - name: 'Currently running services'
       #   run: kubectl get pods -A
 
-      - name: Infra_Init
-        run: make infraInit
+      - name: service_Init
+        run: make serviceInit
 
-      - name: Infra_Plan
-        run: make infraPlan
+      - name: Infra_Deploy
+        run: make serviceDeploy
 
       - name: tmate
         if: ${{ failure() }}
