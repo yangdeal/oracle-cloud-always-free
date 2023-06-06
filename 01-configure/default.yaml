@@ -13,13 +13,13 @@ Services:
     replicas: 2
     persistent_volume_mount: /usr/share/nginx/html
 
-#  jenkins:
-#    image: jenkins/jenkins:lts-jdk11
-#  #    cpu: 500m
-#  #    memory: 1Gi
-#    container_port: 8080
-#    health_check_url: "/login"
-#    persistent_volume_mount: /var/jenkins_home
+  jenkins:
+    image: jenkins/jenkins:lts-jdk11
+  #    cpu: 500m
+  #    memory: 1Gi
+    container_port: 8080
+    health_check_url: "/login"
+    persistent_volume_mount: /var/jenkins_home
 
   # jupyter:
   #   image: jupyter/scipy-notebook

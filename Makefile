@@ -16,12 +16,12 @@ infraDeploy:
 serviceInit:
 	cd K8S-Services && terraform init --reconfigure -backend-config="endpoint=${TF_VAR_backend_endpoint}"
 	cd K8S-Services && terraform workspace select ${MK_NAMESPACE}
-.PHONY: infraInit
+.PHONY: serviceInit
 
 servicePlan:
 	cd K8S-Services && terraform plan -var name_space=${MK_NAMESPACE}
-.PHONY: infraInit
+.PHONY: servicePlan
 
 serviceDeploy:
 	cd K8S-Services && terraform apply --auto-approve -var name_space=${MK_NAMESPACE}
-.PHONY: infraInit
+.PHONY: serviceDeploy
