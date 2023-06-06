@@ -28,6 +28,7 @@ jobs:
       - name: 'Install OCI CLI'
         run: |
           mkdir ~/.oci
+          mkdir ~/.aws
           echo "${{ secrets.ORACLE_CONFIG_FOR_GITACTION }}" > ~/.oci/config
           echo "${{ secrets.ORACLE_API_KEY_FOR_GITACTION_PEM }}" > ~/.oci/oracle_api_key_for_gitAction.pem
           echo "${{ secrets.ORACLE_BACKEND_AWS_CREDENTIALS }}" > ~/.aws/credentials
