@@ -1,8 +1,8 @@
-resource oci_load_balancer_load_balancer load_balancer {
-  compartment_id = var.compartment_id
-  display_name = var.display_name
-  ip_mode    = "IPV4"
-  is_private = "false"
+resource "oci_load_balancer_load_balancer" "load_balancer" {
+  compartment_id             = var.compartment_id
+  display_name               = var.display_name
+  ip_mode                    = "IPV4"
+  is_private                 = "false"
   network_security_group_ids = []
   #reserved_ips = <<Optional value not found in discovery>>
   shape = "flexible"
@@ -15,9 +15,9 @@ resource oci_load_balancer_load_balancer load_balancer {
   ]
 }
 
-resource oci_load_balancer_backend_set backend_set {
+resource "oci_load_balancer_backend_set" "backend_set" {
   health_checker {
-    interval_ms = "10000"
+    interval_ms         = "10000"
     port                = "80"
     protocol            = "HTTP"
     response_body_regex = ""
@@ -31,7 +31,7 @@ resource oci_load_balancer_backend_set backend_set {
   policy           = "ROUND_ROBIN"
 }
 
-resource oci_load_balancer_backend backend {
+resource "oci_load_balancer_backend" "backend" {
   backendset_name  = oci_load_balancer_backend_set.backend_set.name
   backup           = "false"
   drain            = "false"
@@ -42,7 +42,7 @@ resource oci_load_balancer_backend backend {
   weight           = "1"
 }
 
-resource oci_load_balancer_listener listener {
+resource "oci_load_balancer_listener" "listener" {
   connection_configuration {
     backend_tcp_proxy_protocol_version = "0"
     idle_timeout_in_seconds            = "60"

@@ -14,7 +14,7 @@ resource "oci_core_subnet" "public_subnet" {
 }
 
 
-resource oci_core_security_list public_subnet_security_list {
+resource "oci_core_security_list" "public_subnet_security_list" {
   compartment_id = var.compartment_id
 
   display_name = "public_subnet_security_list"
@@ -55,7 +55,7 @@ resource oci_core_security_list public_subnet_security_list {
   }
   egress_security_rules {
     destination = "0.0.0.0/0"
-    protocol = "all"
+    protocol    = "all"
   }
   vcn_id = oci_core_vcn.my_vcn.id
 }

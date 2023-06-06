@@ -28,8 +28,8 @@ resource "oci_core_instance" "free-instance" {
     # TODO: use base64encode
     # base64encode changes even the file does not change, and result the instance replaced.
     # hardcode the user_data for now
-#    "user_data"           = base64encode(file("${path.module}/initial.sh"))
-    "user_data" ="IyEvYmluL2Jhc2gKIyByZWRpcmVjdCBzdGRvdXQvc3RkZXJyIHRvIGEgZmlsZQpleGVjID4gL3RtcC9zdGFydC11cC5sb2cgMj4mMQoKIyBzdGFydCB0aW1lc3RhbXAKZGF0ZQplY2hvICJ0aGlzIGlzIHN0YXJ0IHVwIHNjcmlwdCIKCmFwdCBpbnN0YWxsIC15IG5ldC10b29scyBodG9wIHZpbSBjYS1jZXJ0aWZpY2F0ZXMgY3VybCBnbnVwZyB0bXV4IHpzaAo="
+    #    "user_data"           = base64encode(file("${path.module}/initial.sh"))
+    "user_data" = "IyEvYmluL2Jhc2gKIyByZWRpcmVjdCBzdGRvdXQvc3RkZXJyIHRvIGEgZmlsZQpleGVjID4gL3RtcC9zdGFydC11cC5sb2cgMj4mMQoKIyBzdGFydCB0aW1lc3RhbXAKZGF0ZQplY2hvICJ0aGlzIGlzIHN0YXJ0IHVwIHNjcmlwdCIKCmFwdCBpbnN0YWxsIC15IG5ldC10b29scyBodG9wIHZpbSBjYS1jZXJ0aWZpY2F0ZXMgY3VybCBnbnVwZyB0bXV4IHpzaAo="
   }
   #preserve_boot_volume = <<Optional value not found in discovery>>
   shape = var.instance_shape

@@ -15,6 +15,7 @@ jobs:
       TF_VAR_user_ocid: ${{ secrets.TF_VAR_user_ocid }}
       TF_VAR_fingerprint: ${{ secrets.TF_VAR_fingerprint }}
       TF_VAR_backend_address: ${{ secrets.TF_VAR_backend_address }}
+      TF_VAR_backend_endpoint: ${{ secrets.TF_VAR_backend_endpoint }}
       TF_VAR_private_key_path: "~/.oci/oracle_api_key_for_gitAction.pem"
 
     steps:
@@ -28,8 +29,10 @@ jobs:
       - name: 'Install OCI CLI'
         run: |
           mkdir ~/.oci
+          mkdir ~/.aws
           echo "${{ secrets.ORACLE_CONFIG_FOR_GITACTION }}" > ~/.oci/config
           echo "${{ secrets.ORACLE_API_KEY_FOR_GITACTION_PEM }}" > ~/.oci/oracle_api_key_for_gitAction.pem
+          echo "${{ secrets.ORACLE_BACKEND_AWS_CREDENTIALS }}" > ~/.aws/credentials
           curl -L -O https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
           chmod +x install.sh
           ./install.sh --accept-all-defaults
@@ -48,15 +51,16 @@ jobs:
           echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
           chmod 600 ~/.oci/*
           chmod 600 ~/.kube/*
+          chmod 600 ~/.aws/*
 
       # - name: 'Currently running services'
       #   run: kubectl get pods -A
 
-      - name: TF_Init
-        run: make tfInit
+      - name: service_Init
+        run: make serviceInit
 
-      - name: TF_Plan
-        run: make tfPlan
+      - name: Infra_Deploy
+        run: make serviceDeploy
 
       - name: tmate
         if: ${{ failure() }}

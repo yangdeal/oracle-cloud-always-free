@@ -32,3 +32,8 @@ variable "nsg_id" {
 variable "private_ip" {
   default = ""
 }
+
+variable "instance_image_id" {
+  # Ubuntu 22
+  default = "ocid1.image.oc1.ap-melbourne-1.aaaaaaaapm2ba66pbwc3muls4m6oetdbbrydmjtvnyyqqb35acdjs57fdalq"
+}
