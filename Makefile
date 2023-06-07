@@ -25,3 +25,7 @@ servicePlan:
 serviceDeploy:
 	cd K8S-Services && terraform apply --auto-approve -var name_space=${MK_NAMESPACE}
 .PHONY: serviceDeploy
+
+serviceDestroy:
+	cd K8S-Services && terraform destroy --auto-approve -var name_space=${MK_NAMESPACE}
+.PHONY: serviceDestroy
