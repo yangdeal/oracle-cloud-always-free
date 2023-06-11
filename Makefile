@@ -19,13 +19,16 @@ serviceInit:
 .PHONY: serviceInit
 
 servicePlan:
+	cd K8S-Services && terraform workspace select ${MK_NAMESPACE} 
 	cd K8S-Services && terraform plan -var name_space=${MK_NAMESPACE}
 .PHONY: servicePlan
 
 serviceDeploy:
+	cd K8S-Services && terraform workspace select ${MK_NAMESPACE} 
 	cd K8S-Services && terraform apply --auto-approve -var name_space=${MK_NAMESPACE}
 .PHONY: serviceDeploy
 
 serviceDestroy:
+	cd K8S-Services && terraform workspace select ${MK_NAMESPACE} 
 	cd K8S-Services && terraform destroy --auto-approve -var name_space=${MK_NAMESPACE}
 .PHONY: serviceDestroy
