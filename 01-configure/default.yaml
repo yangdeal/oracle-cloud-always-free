@@ -13,6 +13,13 @@ Services:
     replicas: 2
     persistent_volume_mount: /usr/share/nginx/html
 
+  postgres:
+    image: postgres
+    alb: false
+    container_port: 5432
+    persistent_volume_mount: /home/ydeal
+
+
   jenkins:
     image: jenkins/jenkins:lts-jdk11
   #    cpu: 500m

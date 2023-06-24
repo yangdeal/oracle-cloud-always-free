@@ -13,4 +13,5 @@ module "k8s_services" {
   health_check_url     = contains(keys(each.value), "health_check_url") ? each.value["health_check_url"] : "/"
   health_return_code   = contains(keys(each.value), "health_return_code") ? each.value["health_return_code"] : 200
   dns_domain           = var.dns_domain
+  alb_enable           = contains(keys(each.value), "alb") ? each.value["alb"] : true
 }

@@ -4,6 +4,7 @@ resource "random_integer" "node_port" {
 }
 
 resource "kubernetes_deployment" "this" {
+  wait_for_rollout = false
   metadata {
     namespace = var.name_space
     name      = var.name

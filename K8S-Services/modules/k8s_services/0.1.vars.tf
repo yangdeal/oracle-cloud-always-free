@@ -28,3 +28,5 @@ variable "dns_domain" {}
 variable "health_return_code" {
   default = 200
 }
+
+variable "alb_enable" {}
