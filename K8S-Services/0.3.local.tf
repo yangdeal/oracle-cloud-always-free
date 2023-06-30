@@ -14,8 +14,8 @@ locals {
   main_services_yaml    = yamldecode(file("../01-configure/main.yaml"))
   services_yaml         = local.name_space_lower_case == "main" ? local.main_services_yaml : local.default_services_yaml
 
-  default_env_yaml = yamldecode(file("../01-configure/.default.env.yaml"))
-  main_env_yaml = yamldecode(file("../01-configure/.main.env.yaml"))
+  default_env_yaml = yamldecode(file("../01-configure/.env/default.env.yaml"))
+  main_env_yaml = yamldecode(file("../01-configure/.env/main.env.yaml"))
   env_yaml         = local.name_space_lower_case == "main" ? local.main_env_yaml : local.default_env_yaml
 }
 
