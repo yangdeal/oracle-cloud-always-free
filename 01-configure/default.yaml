@@ -18,7 +18,9 @@ Services:
     alb: false
     container_port: 5432
     persistent_volume_mount: /home/ydeal
-
+#    env:
+#      - name: test
+#        value: test
 
   jenkins:
     image: jenkins/jenkins:lts-jdk11
@@ -28,12 +30,12 @@ Services:
     health_check_url: "/login"
     persistent_volume_mount: /var/jenkins_home
 
-  # jupyter:
-  #   image: jupyter/scipy-notebook
-  #   container_port: 8888
-  #   health_check_url: "/login"
-  #   health_return_code: 405
-  #   persistent_volume_mount: /home/ydeal
+#  jupyter:
+#    image: jupyter/scipy-notebook
+#    container_port: 8888
+#    health_check_url: "/login"
+#    health_return_code: 405
+#    persistent_volume_mount: /home/ydeal
 
 #  springboot:
 #    image: ydeal/springboot-helloworld:0.2
@@ -50,4 +52,9 @@ Services:
 #    container_port: 3306
 #    alb: false
 #    persistent_volume_mount: /var/lib/mysql
-    
+
+#
+#env:
+#  postgres:
+#    abc: abc
+#    efg: abc

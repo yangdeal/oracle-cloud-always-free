@@ -38,6 +38,14 @@ resource "kubernetes_deployment" "this" {
           image = var.image
           name  = var.name
 
+          dynamic "env" {
+            for_each = var.env_map != "" ? var.env_map : {}
+            content {
+              name  = env.key
+              value = env.value
+            }
+          }
+
           port {
             container_port = var.container_port
           }

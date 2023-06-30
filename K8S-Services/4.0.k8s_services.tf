@@ -14,4 +14,5 @@ module "k8s_services" {
   health_return_code   = contains(keys(each.value), "health_return_code") ? each.value["health_return_code"] : 200
   dns_domain           = var.dns_domain
   alb_enable           = contains(keys(each.value), "alb") ? each.value["alb"] : true
+  env_map              = contains(keys(local.env_yaml), each.key) ? local.env_yaml[each.key] : {}
 }

@@ -40,3 +40,4 @@ terraform.rc
 
 .idea
 
+01-configure/.*.env.yaml

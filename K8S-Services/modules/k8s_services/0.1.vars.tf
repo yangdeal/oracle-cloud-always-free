@@ -30,3 +30,8 @@ variable "health_return_code" {
 }
 
 variable "alb_enable" {}
+
+variable "env_map" {
+  type = map(string)
+  default = {}
+}

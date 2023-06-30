@@ -1,5 +1,4 @@
-MK_GIT_BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
-MK_NAMESPACE = $(shell echo ${MK_GIT_BRANCH} | sed -e 's/\(.*\)/\L\1/')
+MK_NAMESPACE = $(shell git rev-parse --abbrev-ref HEAD | tr '[:upper:]' '[:lower:]')
 
 infraInit:
 	cd infra/K8S && terraform init -backend-config="address=${TF_VAR_backend_address}"; cd ../../
