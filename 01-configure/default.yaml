@@ -30,6 +30,23 @@ Services:
     health_check_url: "/login"
     persistent_volume_mount: /var/jenkins_home
 
+  kuma:
+    image: louislam/uptime-kuma
+    container_port: 3001
+    health_check_url: "/dashboard"
+    persistent_volume_mount: /app/data
+#
+#  gatus:
+#    image: twinproduction/gatus
+#    container_port: 8080
+#    persistent_volume_mount: /app/data
+#
+#  statping:
+#    image: adamboutcher/statping-ng
+#    container_port: 8080
+#    health_check_url: "/setup"
+#    persistent_volume_mount: /app/statping
+
 #  jupyter:
 #    image: jupyter/scipy-notebook
 #    container_port: 8888
