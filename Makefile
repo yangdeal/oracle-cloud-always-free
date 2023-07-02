@@ -1,5 +1,4 @@
-MK_GIT_BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
-MK_NAMESPACE = $(shell echo ${MK_GIT_BRANCH} | sed -e 's/\(.*\)/\L\1/')
+MK_NAMESPACE = $(shell git rev-parse --abbrev-ref HEAD | tr '[:upper:]' '[:lower:]')
 
 infraInit:
 	cd infra/K8S && terraform init -backend-config="address=${TF_VAR_backend_address}"; cd ../../
@@ -15,13 +14,20 @@ infraDeploy:
 
 serviceInit:
 	cd K8S-Services && terraform init --reconfigure -backend-config="endpoint=${TF_VAR_backend_endpoint}"
-	cd K8S-Services && terraform workspace select -or-create ${MK_NAMESPACE}
-.PHONY: infraInit
+	cd K8S-Services && terraform workspace select ${MK_NAMESPACE}
+.PHONY: serviceInit
 
 servicePlan:
+	cd K8S-Services && terraform workspace select ${MK_NAMESPACE} 
 	cd K8S-Services && terraform plan -var name_space=${MK_NAMESPACE}
-.PHONY: infraInit
+.PHONY: servicePlan
 
 serviceDeploy:
+	cd K8S-Services && terraform workspace select ${MK_NAMESPACE} 
 	cd K8S-Services && terraform apply --auto-approve -var name_space=${MK_NAMESPACE}
-.PHONY: infraInit
+.PHONY: serviceDeploy
+
+serviceDestroy:
+	cd K8S-Services && terraform workspace select ${MK_NAMESPACE} 
+	cd K8S-Services && terraform destroy --auto-approve -var name_space=${MK_NAMESPACE}
+.PHONY: serviceDestroy

@@ -4,6 +4,7 @@ resource "random_integer" "node_port" {
 }
 
 resource "kubernetes_deployment" "this" {
+  wait_for_rollout = false
   metadata {
     namespace = var.name_space
     name      = var.name
@@ -36,6 +37,14 @@ resource "kubernetes_deployment" "this" {
         container {
           image = var.image
           name  = var.name
+
+          dynamic "env" {
+            for_each = var.env_map != "" ? var.env_map : {}
+            content {
+              name  = env.key
+              value = env.value
+            }
+          }
 
           port {
             container_port = var.container_port

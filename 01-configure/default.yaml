@@ -13,20 +13,46 @@ Services:
     replicas: 2
     persistent_volume_mount: /usr/share/nginx/html
 
-#  jenkins:
-#    image: jenkins/jenkins:lts-jdk11
-#  #    cpu: 500m
-#  #    memory: 1Gi
-#    container_port: 8080
-#    health_check_url: "/login"
-#    persistent_volume_mount: /var/jenkins_home
+  postgres:
+    image: postgres
+    alb: false
+    container_port: 5432
+    persistent_volume_mount: /home/ydeal
+#    env:
+#      - name: test
+#        value: test
 
-  # jupyter:
-  #   image: jupyter/scipy-notebook
-  #   container_port: 8888
-  #   health_check_url: "/login"
-  #   health_return_code: 405
-  #   persistent_volume_mount: /home/ydeal
+  jenkins:
+    image: jenkins/jenkins:lts-jdk11
+  #    cpu: 500m
+  #    memory: 1Gi
+    container_port: 8080
+    health_check_url: "/login"
+    persistent_volume_mount: /var/jenkins_home
+
+  kuma:
+    image: louislam/uptime-kuma
+    container_port: 3001
+    health_check_url: "/dashboard"
+    persistent_volume_mount: /app/data
+#
+#  gatus:
+#    image: twinproduction/gatus
+#    container_port: 8080
+#    persistent_volume_mount: /app/data
+#
+#  statping:
+#    image: adamboutcher/statping-ng
+#    container_port: 8080
+#    health_check_url: "/setup"
+#    persistent_volume_mount: /app/statping
+
+#  jupyter:
+#    image: jupyter/scipy-notebook
+#    container_port: 8888
+#    health_check_url: "/login"
+#    health_return_code: 405
+#    persistent_volume_mount: /home/ydeal
 
 #  springboot:
 #    image: ydeal/springboot-helloworld:0.2
@@ -43,4 +69,9 @@ Services:
 #    container_port: 3306
 #    alb: false
 #    persistent_volume_mount: /var/lib/mysql
-    
+
+#
+#env:
+#  postgres:
+#    abc: abc
+#    efg: abc

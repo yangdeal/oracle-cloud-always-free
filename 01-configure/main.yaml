@@ -15,8 +15,14 @@ Services:
 
   jenkins:
     image: jenkins/jenkins:lts-jdk11
-#    cpu: 500m
-#    memory: 1Gi
+  #    cpu: 500m
+  #    memory: 1Gi
     container_port: 8080
     health_check_url: "/login"
     persistent_volume_mount: /var/jenkins_home
+
+  kuma:
+    image: louislam/uptime-kuma
+    container_port: 3001
+    health_check_url: "/dashboard"
+    persistent_volume_mount: /app/data

@@ -1,4 +1,5 @@
 module "alb" {
+  count = var.alb_enable ? 1 : 0
   source = "../../../infra/K8S/modules/alb_website"
 
   backend_node_ip    = var.k8s_backend_node_ips

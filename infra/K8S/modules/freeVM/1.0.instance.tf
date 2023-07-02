@@ -36,9 +36,9 @@ resource "oci_core_instance" "free-instance" {
 
   source_details {
     boot_volume_size_in_gbs = var.boot_volume_size_in_gbs
-#    source_id               = data.oci_core_images.InstanceImageOCID.images[0].id
-    source_id               = var.instance_image_id
-    source_type             = "image"
+    #    source_id               = data.oci_core_images.InstanceImageOCID.images[0].id
+    source_id   = var.instance_image_id
+    source_type = "image"
   }
   state = "RUNNING"
 }
