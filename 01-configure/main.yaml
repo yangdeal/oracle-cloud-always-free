@@ -26,3 +26,9 @@ Services:
     container_port: 3001
     health_check_url: "/dashboard"
     persistent_volume_mount: /app/data
+
+  nextcloud:
+    image: nextcloud
+    container_port: 80
+    health_check_url: "/index.html"
+    persistent_volume_mount: /var/www/html
