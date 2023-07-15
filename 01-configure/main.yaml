@@ -38,3 +38,10 @@ Services:
     alb: false
     container_port: 3306
     persistent_volume_mount: /var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_port: 80
+    health_check_url: "/"
+    persistent_volume_mount: /ydeal
+
