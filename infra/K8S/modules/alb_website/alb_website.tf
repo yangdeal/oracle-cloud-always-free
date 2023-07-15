@@ -10,13 +10,17 @@ resource "oci_load_balancer_listener" "http_listener" {
   load_balancer_id         = var.load_balancer_id
   name                     = var.listener_name
   #path_route_set_name = <<Optional value not found in discovery>>
-  port     = "80"
+  port     = "443"
   protocol = "HTTP"
   #routing_policy_name = <<Optional value not found in discovery>>
   rule_set_names = [
   ]
+  ssl_configuration {
+    certificate_ids = ["ocid1.certificate.oc1.ap-melbourne-1.amaaaaaavd652aqa4wbmvg4262lnkqrlokru7ixti5vlysdy3tfaclpzmtka"]
+    verify_depth = 5
+    verify_peer_certificate = false
+  }
 }
-
 
 resource "oci_load_balancer_backend_set" "backend_set" {
   health_checker {
