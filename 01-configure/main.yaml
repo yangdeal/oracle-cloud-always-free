@@ -32,3 +32,9 @@ Services:
     container_port: 80
     health_check_url: "/index.html"
     persistent_volume_mount: /var/www/html
+
+  mysql:
+    image: mysql:8.0
+    alb: false
+    container_port: 3306
+    persistent_volume_mount: /var/lib/mysql
